@@ -1,3 +1,41 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+    .inter {
+        font-family: 'Inter', sans-serif; 
+    }
+
+    .advent-pro {
+        font-family: 'Advent Pro', sans-serif; 
+    }
+
+    .marsallo {
+        background: #FFCEFA;
+    }
+
+    .purple {
+        background: #D7A4FF;
+    }
+
+    .light-green{
+        background: #C3FFCA;
+    }
+
+    .void-button {
+        @apply w-full h-[25vh] text-[128px] inter; /* Використовуйте font-inter без крапки */
+    }
+
+    .void-button--small {
+        @apply h-[10vh] text-[40px] inter; /* Використовуйте модифікатор без крапки */
+    }
+
+    .title{
+        @apply text-[40px] text-center
+    }
+
+    .title-description{
+        @apply w-[400px] text-[24px] advent-pro text-center mx-auto;
+    }
+}

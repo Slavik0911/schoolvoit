@@ -554,15 +554,63 @@ video {
   display: none;
 }
 
-.text-3xl {
-  font-size: 1.875rem;
-  line-height: 2.25rem;
+.marsallo {
+  background: #FFCEFA;
 }
 
-.font-bold {
-  font-weight: 700;
+.purple {
+  background: #D7A4FF;
 }
 
-.underline {
-  text-decoration-line: underline;
+.light-green{
+  background: #C3FFCA;
+}
+
+.void-button {
+  font-family: 'Inter', sans-serif;
+  height: 25vh;
+  width: 100%;
+  font-size: 128px;
+  /* Використовуйте font-inter без крапки */
+}
+
+.void-button--small {
+  font-family: 'Inter', sans-serif;
+  height: 10vh;
+  font-size: 40px;
+  /* Використовуйте модифікатор без крапки */
+}
+
+.title {
+  text-align: center;
+  font-size: 40px;
+}
+
+.title-description {
+  font-family: 'Advent Pro', sans-serif;
+  margin-left: auto;
+  margin-right: auto;
+  width: 400px;
+  text-align: center;
+  font-size: 24px;
+}
+
+.mb-\[0px\] {
+  margin-bottom: 0px;
+}
+
+.mt-\[30px\] {
+  margin-top: 30px;
+}
+
+.mt-\[50px\] {
+  margin-top: 50px;
+}
+
+.mt-\[120px\] {
+  margin-top: 120px;
+}
+
+.mb-\[50px\] {
+  margin-bottom: 50px;
 }
