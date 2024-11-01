@@ -1,41 +1,72 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
 @layer components {
+    .button-container {
+        @apply flex flex-col w-full; /* Дозволяє контейнеру займати 100% ширини */
+    }
+    
     .inter {
         font-family: 'Inter', sans-serif; 
     }
-
     .advent-pro {
         font-family: 'Advent Pro', sans-serif; 
     }
-
     .marsallo {
         background: #FFCEFA;
     }
-
     .purple {
         background: #D7A4FF;
     }
-
     .light-green{
         background: #C3FFCA;
     }
-
     .void-button {
-        @apply w-full h-[25vh] text-[128px] inter; /* Використовуйте font-inter без крапки */
+        @apply w-full h-[25vh] text-[128px] inter; 
     }
-
     .void-button--small {
-        @apply h-[10vh] text-[40px] inter; /* Використовуйте модифікатор без крапки */
+        @apply h-[10vh] text-[40px] inter; 
     }
-
     .title{
         @apply text-[40px] text-center
     }
-
     .title-description{
-        @apply w-[400px] text-[24px] advent-pro text-center mx-auto;
+        @apply w-full text-[24px] advent-pro text-center mx-auto;
     }
+    .title-creator {
+        @apply text-[24px] advent-pro; /* Стилі тексту "byYp" */
+        right: 10px; /* Відстань від правого краю кнопки */
+        top: 50%; /* Вирівнюємо по вертикалі по центру кнопки */
+        transform: translateY(-50%); /* Центруємо по вертикалі */
+    }
+    
+    @media (max-width: 1024px) {
+        .title{
+            @apply text-[30px] text-center
+        }
+        .title-description{
+            @apply w-full text-[24px] advent-pro text-center 
+        }
+        .void-button{
+            @apply w-full h-[25vh] text-[64px] inter; 
+        }
+        .void-button--small {
+            @apply h-[10vh] text-[40px] inter; 
+        }
+    } 
+    @media (max-width: 630px) {
+        .title{
+            @apply text-[30px] text-center
+        }
+        .title-description{
+            @apply w-full text-[18px] advent-pro text-center 
+        }
+        .void-button{
+            @apply w-full h-[25vh] text-[64px] inter; 
+        }
+        .void-button--small {
+            @apply h-[10vh] text-[20px] inter; 
+        }
+    }
+    
 }

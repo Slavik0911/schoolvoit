@@ -571,14 +571,12 @@ video {
   height: 25vh;
   width: 100%;
   font-size: 128px;
-  /* Використовуйте font-inter без крапки */
 }
 
 .void-button--small {
   font-family: 'Inter', sans-serif;
   height: 10vh;
   font-size: 40px;
-  /* Використовуйте модифікатор без крапки */
 }
 
 .title {
@@ -590,27 +588,77 @@ video {
   font-family: 'Advent Pro', sans-serif;
   margin-left: auto;
   margin-right: auto;
-  width: 400px;
+  width: 100%;
   text-align: center;
   font-size: 24px;
 }
 
-.mb-\[0px\] {
-  margin-bottom: 0px;
+@media (max-width: 1024px) {
+  .title {
+    text-align: center;
+    font-size: 30px;
+  }
+
+  .title-description {
+    font-family: 'Advent Pro', sans-serif;
+    width: 100%;
+    text-align: center;
+    font-size: 24px;
+  }
+
+  .void-button {
+    font-family: 'Inter', sans-serif;
+    height: 25vh;
+    width: 100%;
+    font-size: 64px;
+  }
+
+  .void-button--small {
+    font-family: 'Inter', sans-serif;
+    height: 10vh;
+    font-size: 40px;
+  }
 }
 
-.mt-\[30px\] {
-  margin-top: 30px;
+@media (max-width: 630px) {
+  .title {
+    text-align: center;
+    font-size: 30px;
+  }
+
+  .title-description {
+    font-family: 'Advent Pro', sans-serif;
+    width: 100%;
+    text-align: center;
+    font-size: 18px;
+  }
+
+  .void-button {
+    font-family: 'Inter', sans-serif;
+    height: 25vh;
+    width: 100%;
+    font-size: 64px;
+  }
+
+  .void-button--small {
+    font-family: 'Inter', sans-serif;
+    height: 10vh;
+    font-size: 20px;
+  }
 }
 
-.mt-\[50px\] {
-  margin-top: 50px;
+.flex {
+  display: flex;
 }
 
-.mt-\[120px\] {
-  margin-top: 120px;
+.min-h-screen {
+  min-height: 100vh;
 }
 
-.mb-\[50px\] {
-  margin-bottom: 50px;
+.flex-grow {
+  flex-grow: 1;
+}
+
+.flex-col {
+  flex-direction: column;
 }
