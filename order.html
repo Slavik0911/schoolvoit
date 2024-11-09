@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="./output.css" rel="stylesheet">
+    <link href="input.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Advent+Pro:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+    <title>Document</title>    
+</head>
+
+<body class="pink flex flex-col items-center">
+    <div class="flex items-center w-full px-4" style="max-width: 400px;">
+        <button id="backButton" class="back-button">
+            <span class="material-icons arrow-icon">arrow_back</span>
+        </button>
+        <h1 class="title flex-grow text-center">Подача ідеї</h1>
+    </div>
+
+    <input id="input-title" type="text" class="input--medium mt-4" placeholder="Назва" style="width: 300px;">
+    <textarea id="input-description" class="input-description mt-4" placeholder="Опишіть свою ідею..." style="width: 300px; height: 150px;"></textarea>
+    <input id="input-number" type="number" class="input--medium mt-4" placeholder="Номер телефону" style="width: 300px;">
+    <button id="button-apply" class="button--medium mt-4" style="width: 300px;">Готово</button>
+
+    <h1 class="title-description inter mt-4">Правила:</h1>
+    <ul class="rules list-disc list-inside mt-2 inter" style="max-width: 300px;">
+        <li>Реалістичність: Ідеї повинні бути реалістичними і досяжними у найближчій перспективі.</li>
+        <li>Актуальність: Ідеї повинні бути спрямовані на покращення навчального процесу, шкільного середовища або загальної атмосфери в школі.</li>
+        <li>Уважність до ресурсів: Ідеї мають враховувати обмеження шкільного бюджету, ресурсів та часу.</li>
+        <li>Повага та етика: Ідеї повинні бути етичними і не порушувати права інших учнів, вчителів або шкільної адміністрації.</li>
+    </ul>
+
+    <script src="src/script/main.js" type="module" defer></script>
+
+
+</body>

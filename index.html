@@ -9,15 +9,18 @@
   <link href="https://fonts.googleapis.com/css2?family=Advent+Pro:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body class="flex flex-col min-h-screen">
-  <h1 class="title">Дозволити легкі наркотики</h1>
-  <h1 class="title-description">В Нідерландах в Бельгії дозволено, чого тут не, наркотики облегшують навчання, а особливо написання творів з літератури, травички курнув і написав характеристику образу, кайф ж)</h1>
-  <div class="flex-grow">
-</div>
+  <h1 id="title-random" class="title"></h1>
+  <h1 id="description-random" class="title-description"></h1>
+  <div class="flex-grow"></div>
   <div>
-    <button class="void-button marsallo">За</button>
+    <button class="void-button pink">За</button>
     <button class="void-button purple">Проти</button>
-    <button class="void-button void-button--small light-green">Подати ідею</button>
+    <button id="submitIdeaButton" class="void-button void-button--small light-green">Подати ідею</button>
   </div>
-  
+   
+  <script src="src/script/main.js" type="module" defer></script>
+
 </body>
 </html>
+
+<!-- npx tailwindcss -i input.css -o output.css --watch -->

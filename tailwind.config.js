@@ -3,6 +3,8 @@ module.exports = {
     './*.html',        
     './**/*.html',       
     './src/**/*.{js,jsx,ts,tsx}', 
+    './src/**/*.{html,js}', // Включити всі HTML та JS файли в папці src
+    './public/index.html',
   ],
   theme: {
     extend: {
