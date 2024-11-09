@@ -2,17 +2,24 @@
 @tailwind components;
 @tailwind utilities;
 @layer components {
-    .button-container {
-        @apply flex flex-col w-full; /* Дозволяє контейнеру займати 100% ширини */
+    //button back
+    .back-button {
+        @apply flex bg-none text-xl;
     }
-    
+    .arrow-icon {
+        @apply  ml-[]; 
+    }
+
+    // fonts
     .inter {
         font-family: 'Inter', sans-serif; 
     }
     .advent-pro {
         font-family: 'Advent Pro', sans-serif; 
     }
-    .marsallo {
+
+    //colors
+    .pink {
         background: #FFCEFA;
     }
     .purple {
@@ -21,31 +28,48 @@
     .light-green{
         background: #C3FFCA;
     }
+
+    //some buttons
     .void-button {
         @apply w-full h-[25vh] text-[128px] inter; 
     }
     .void-button--small {
         @apply h-[10vh] text-[40px] inter; 
     }
+    .button--medium{
+        @apply purple w-[300px] h-[60px] rounded-2xl;
+    }
+
+    //inputs
+    .input--medium{
+        @apply w-[300px] h-[60px] rounded-2xl pl-[10px] ;
+
+    }
+
+    .input-description{
+        @apply w-[300px] h-[400px] pl-[10px] pt-[10px] rounded-2xl;
+    }
+
+    //text
     .title{
-        @apply text-[40px] text-center
+        @apply text-[40px] text-center ;
     }
     .title-description{
         @apply w-full text-[24px] advent-pro text-center mx-auto;
     }
-    .title-creator {
-        @apply text-[24px] advent-pro; /* Стилі тексту "byYp" */
-        right: 10px; /* Відстань від правого краю кнопки */
-        top: 50%; /* Вирівнюємо по вертикалі по центру кнопки */
-        transform: translateY(-50%); /* Центруємо по вертикалі */
+
+    .rules{
+        @apply w-full text-[24px] mx-auto;
     }
+
     
+    //adaptive interface
     @media (max-width: 1024px) {
         .title{
-            @apply text-[30px] text-center
+            @apply text-[30px] text-center;
         }
         .title-description{
-            @apply w-full text-[24px] advent-pro text-center 
+            @apply w-full text-[24px] advent-pro text-center ;
         }
         .void-button{
             @apply w-full h-[25vh] text-[64px] inter; 
@@ -56,10 +80,10 @@
     } 
     @media (max-width: 630px) {
         .title{
-            @apply text-[30px] text-center
+            @apply text-[30px] text-center;
         }
         .title-description{
-            @apply w-full text-[18px] advent-pro text-center 
+            @apply w-full text-[18px] advent-pro text-center ;
         }
         .void-button{
             @apply w-full h-[25vh] text-[64px] inter; 
@@ -68,5 +92,15 @@
             @apply h-[10vh] text-[20px] inter; 
         }
     }
+
+
+    @media (max-height: 830px) {
+        .title{
+            @apply text-[30px];
+        }
+        .rules{
+            @apply w-full text-[14px] ;
+        }
     
+    }
 }
