@@ -1,7 +1,7 @@
 import { collection, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/9.1.0/firebase-firestore.js";
 import { firestore } from './firebase.js';
 
-// Function for adding an idea to DB
+// Функція для додавання ідеї в БД
 async function submitIdea(title, description) {
   try {
     const ideasCollection = collection(firestore, "ideas");
@@ -18,21 +18,26 @@ async function submitIdea(title, description) {
   }
 }
 
-// A feature to get a random idea from DB
+// Функція для отримання випадкової ідеї, яка ще не була проголосована
 async function getRandomIdea(title_random, description_random) {
   try {
+    const votedIdeas = JSON.parse(localStorage.getItem('votedIdeas')) || [];
     const ideasCollection = collection(firestore, "ideas");
     const snapshot = await getDocs(ideasCollection);
-    const ideas = snapshot.docs.map(doc => doc.data());
-    
-    if (ideas.length > 0) {
-      const randomIdea = ideas[Math.floor(Math.random() * ideas.length)];
+    const ideas = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+
+    // Фільтруємо ідеї, які вже були проголосовані
+    const filteredIdeas = ideas.filter(idea => !votedIdeas.includes(idea.id));
+
+    if (filteredIdeas.length > 0) {
+      const randomIdea = filteredIdeas[Math.floor(Math.random() * filteredIdeas.length)];
       title_random.textContent = randomIdea.title;
       description_random.textContent = randomIdea.description;
+      title_random.dataset.ideaId = randomIdea.id;
     } else {
       title_random.textContent = "Немає доступних ідей.";
       description_random.textContent = "";
-    }//error handler
+    }
   } catch (error) {
     console.error("Помилка при отриманні ідеї:", error);
     title_random.textContent = "Помилка завантаження ідеї.";
@@ -40,4 +45,22 @@ async function getRandomIdea(title_random, description_random) {
   }
 }
 
-export { submitIdea, getRandomIdea };
+// Функція для голосування
+function voteIdea(voteType) {
+  const ideaId = document.getElementById('title-random').dataset.ideaId;
+  if (!ideaId) return;
+
+  // Зберігаємо ідентифікатор ідеї в Local Storage
+  const votedIdeas = JSON.parse(localStorage.getItem('votedIdeas')) || [];
+  if (!votedIdeas.includes(ideaId)) {
+    votedIdeas.push(ideaId);
+    localStorage.setItem('votedIdeas', JSON.stringify(votedIdeas));
+  }
+
+  // Показуємо нову ідею після голосування
+  const title_random = document.getElementById('title-random');
+  const description_random = document.getElementById('description-random');
+  getRandomIdea(title_random, description_random);
+}
+
+export { submitIdea, getRandomIdea, voteIdea };

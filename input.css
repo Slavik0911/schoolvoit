@@ -1,16 +1,17 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 @layer components {
-    //button back
+    /* button back */
     .back-button {
         @apply flex bg-none text-xl;
     }
     .arrow-icon {
-        @apply  ml-[]; 
+        @apply ml-[]; 
     }
 
-    // fonts
+    /* fonts */
     .inter {
         font-family: 'Inter', sans-serif; 
     }
@@ -18,74 +19,73 @@
         font-family: 'Advent Pro', sans-serif; 
     }
 
-    //colors
+    /* colors */
     .pink {
         background: #FFCEFA;
     }
     .purple {
         background: #D7A4FF;
     }
-    .light-green{
+    .light-green {
         background: #C3FFCA;
     }
 
-    //some buttons
+    /* some buttons */
     .void-button {
         @apply w-full h-[25vh] text-[128px] inter; 
     }
     .void-button--small {
         @apply h-[10vh] text-[40px] inter; 
     }
-    .button--medium{
+    .button--medium {
         @apply purple w-[300px] h-[60px] rounded-2xl;
     }
 
-    //inputs
-    .input--medium{
-        @apply w-[300px] h-[60px] rounded-2xl pl-[10px] ;
-
+    /* inputs */
+    .input--medium {
+        @apply w-[300px] h-[60px] rounded-2xl pl-[10px];
     }
 
-    .input-description{
+    .input-description {
         @apply w-[300px] h-[400px] pl-[10px] pt-[10px] rounded-2xl;
     }
 
-    //text
-    .title{
-        @apply text-[40px] text-center ;
+    /* text */
+    .title {
+        @apply text-[40px] text-center;
     }
-    .title-description{
+    .title-description {
         @apply w-full text-[24px] advent-pro text-center mx-auto;
     }
 
-    .rules{
-        @apply w-full text-[24px] mx-auto;
+    .rules {
+        @apply w-full text-[14px] mx-auto;
     }
 
-    
-    //adaptive interface
+    /* adaptive interface */
     @media (max-width: 1024px) {
-        .title{
+        .title {
             @apply text-[30px] text-center;
         }
-        .title-description{
-            @apply w-full text-[24px] advent-pro text-center ;
+        .title-description {
+            @apply w-full text-[24px] advent-pro text-center;
         }
-        .void-button{
+        .void-button {
             @apply w-full h-[25vh] text-[64px] inter; 
         }
         .void-button--small {
             @apply h-[10vh] text-[40px] inter; 
         }
-    } 
+    }
+
     @media (max-width: 630px) {
-        .title{
+        .title {
             @apply text-[30px] text-center;
         }
-        .title-description{
-            @apply w-full text-[18px] advent-pro text-center ;
+        .title-description {
+            @apply w-full text-[18px] advent-pro text-center;
         }
-        .void-button{
+        .void-button {
             @apply w-full h-[25vh] text-[64px] inter; 
         }
         .void-button--small {
@@ -94,13 +94,4 @@
     }
 
 
-    @media (max-height: 830px) {
-        .title{
-            @apply text-[30px];
-        }
-        .rules{
-            @apply w-full text-[14px] ;
-        }
-    
-    }
 }
