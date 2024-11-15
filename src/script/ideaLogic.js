@@ -12,7 +12,7 @@ async function submitIdea(title, description) {
       timestamp: new Date().toISOString(),
       voteRate: 0 // Add an initial vote rate
     });
-    alert("Ідея успішно дадана!");
+    alert("Ідея успішно додана!");
     window.location.href = 'order.html';
   } catch (error) {
     console.error("Error adding idea:", error);
@@ -20,29 +20,33 @@ async function submitIdea(title, description) {
   }
 }
 
-// Function to get a random idea that has not been voted on yet
-async function getRandomIdea(title_random, description_random) {
+// Function to get the latest idea that has not been voted on yet
+async function getLatestIdea(title_random, description_random) {
   try {
     const votedIdeas = JSON.parse(localStorage.getItem('votedIdeas')) || [];
     const ideasCollection = collection(firestore, "ideas");
     const snapshot = await getDocs(ideasCollection);
     const ideas = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
 
+    // Sort ideas by timestamp (newest first)
+    ideas.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+
     // Filter out ideas that have already been voted on
     const filteredIdeas = ideas.filter(idea => !votedIdeas.includes(idea.id));
 
+    // Display the latest idea
     if (filteredIdeas.length > 0) {
-      const randomIdea = filteredIdeas[Math.floor(Math.random() * filteredIdeas.length)];
-      title_random.textContent = randomIdea.title;
-      description_random.textContent = randomIdea.description;
-      title_random.dataset.ideaId = randomIdea.id;
+      const latestIdea = filteredIdeas[0]; // Take the first (newest) idea
+      title_random.textContent = latestIdea.title;
+      description_random.textContent = latestIdea.description;
+      title_random.dataset.ideaId = latestIdea.id;
     } else {
-      title_random.textContent = "Немає доступних ідей.";
+      title_random.textContent = "No available ideas.";
       description_random.textContent = "";
     }
   } catch (error) {
-    console.error("Помилка при отриманні ідеї:", error);
-    title_random.textContent = "Помилка завантаження ідеї.";
+    console.error("Error getting idea:", error);
+    title_random.textContent = "Error loading idea.";
     description_random.textContent = "";
   }
 }
@@ -80,7 +84,7 @@ async function voteIdea(voteType) {
   // Update the display with a new idea
   const title_random = document.getElementById('title-random');
   const description_random = document.getElementById('description-random');
-  getRandomIdea(title_random, description_random);
+  getLatestIdea(title_random, description_random);
 }
 
-export { submitIdea, getRandomIdea, voteIdea };
+export { submitIdea, getLatestIdea, voteIdea };

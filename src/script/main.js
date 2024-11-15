@@ -1,5 +1,5 @@
 // Import functions from ideaLogic.js and domHandlers.js
-import { submitIdea, getRandomIdea, voteIdea } from './ideaLogic.js';
+import { submitIdea, getLatestIdea, voteIdea } from './ideaLogic.js';
 import { setupBackButton, setupSubmitButton, setupButtonApply } from './domHandlers.js';
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const downvoteButton = document.querySelector('.void-button.purple');
 
   if (title_random && description_random) {
-    getRandomIdea(title_random, description_random);
+    getLatestIdea(title_random, description_random);
   }
 
   if (upvoteButton) {

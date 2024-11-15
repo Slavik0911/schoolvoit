@@ -1,5 +1,5 @@
 // Import functions from ideaLogic.js
-import { submitIdea, getRandomIdea, voteIdea } from './ideaLogic.js';
+import { submitIdea, getLatestIdea, voteIdea } from './ideaLogic.js';
 
 // Get HTML elements
 const submitButton = document.getElementById('submitIdeaButton');
@@ -48,10 +48,10 @@ function setupButtonApply() {
   }
 }
 
-// Function to get a random idea that hasn't been voted on yet
+// Function to get the latest idea that hasn't been voted on yet
 function setupRandomIdea() {
   if (title_random && description_random) {
-    getRandomIdea(title_random, description_random);
+    getLatestIdea(title_random, description_random);
   }
 }
 
