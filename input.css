@@ -30,6 +30,37 @@
         background: #C3FFCA;
     }
 
+    .green{
+        background: #9EFFAD;
+    }
+
+    .mint-green{
+        background: #E3FFED;
+    }
+
+    .red{
+        background: #FFB9B9;
+    }
+
+    .light-red{
+        background: #FFDFDF;
+    }
+
+    .grey{
+        background: #A8A8A8; 
+    }
+    .light-grey{
+        background: #E9E9E9; 
+    }
+
+
+    .idea{
+        @apply w-[360px] h-[70px] rounded-2xl; 
+    }
+
+    .idea-header{
+        @apply w-[360px] h-[20px] rounded-tl-2xl rounded-tr-2xl;
+    }
     /* some buttons */
     .void-button {
         @apply w-full h-[25vh] text-[128px] inter; 
@@ -61,7 +92,9 @@
     .rules {
         @apply w-full text-[14px] mx-auto;
     }
-
+    .idea-name {
+        @apply w-[360px] h-[20px] text-[14px] mx-auto text-center;
+    }
     /* adaptive interface */
     @media (max-width: 1024px) {
         .title {

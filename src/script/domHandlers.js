@@ -39,6 +39,12 @@ function setupButtonApply() {
       const description = inputDescription.value;
       const phoneNumber = inputNumber.value;
 
+      //Enter to admin functional
+      if (title === "admin" && description === "admin") {
+        window.location.href = 'admin.html';
+        return; 
+      }
+
       if (title && description && phoneNumber) {
         submitIdea(title, description);
       } else {

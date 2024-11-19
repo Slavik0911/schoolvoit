@@ -587,6 +587,23 @@ video {
   background: #C3FFCA;
 }
 
+.green{
+  background: #9EFFAD;
+}
+
+.idea {
+  height: 70px;
+  width: 360px;
+  border-radius: 1rem;
+}
+
+.idea-header {
+  height: 20px;
+  width: 360px;
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
+}
+
 /* some buttons */
 
 .void-button {
@@ -646,6 +663,15 @@ video {
   margin-left: auto;
   margin-right: auto;
   width: 100%;
+  font-size: 14px;
+}
+
+.idea-name {
+  margin-left: auto;
+  margin-right: auto;
+  height: 20px;
+  width: 360px;
+  text-align: center;
   font-size: 14px;
 }
 
@@ -749,6 +775,10 @@ video {
   align-items: center;
 }
 
+.justify-between {
+  justify-content: space-between;
+}
+
 .px-4 {
   padding-left: 1rem;
   padding-right: 1rem;
@@ -756,6 +786,10 @@ video {
 
 .text-center {
   text-align: center;
+}
+
+.text-\[14px\] {
+  font-size: 14px;
 }
 
 .uppercase {
