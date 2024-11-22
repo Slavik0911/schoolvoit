@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="./output.css" rel="stylesheet">
+    <link href="input.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Advent+Pro:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body class="flex flex-col items-center">
+    <h1 class="title inter">Список ідей</h1>
+    <button class="title-description">Останні</button>
+
+    <div class="idea green mt-2 flex flex-col">
+        <div class="idea-header light-green">
+            <h1 class="idea-name">Дозволити пєтушині бої</h1>
+        </div>
+        <div class="idea-body flex justify-between items-center px-4">
+            <span class="text-[14px]">2024-11-19</span>
+            <span  id="votes-info">⭡ 100 ⭣ 1</span>
+        </div>
+    </div>
+    <div class="idea red mt-2 flex flex-col">
+        <div class="idea-header light-red">
+            <h1 class="idea-name">Заборонити наркоту</h1>
+        </div>
+        <div class="idea-body flex justify-between items-center px-4">
+            <span class="text-[14px]">2024-11-19</span>
+            <span  id="votes-info">⭡ 1 ⭣ 100</span>
+        </div>
+    </div>
+    <div class="idea grey mt-2 flex flex-col">
+        <div class="idea-header light-grey">
+            <h1 class="idea-name">Побити деректора</h1>
+        </div>
+        <div class="idea-body flex justify-between items-center px-4">
+            <span class="text-[14px]">2024-11-19</span>
+            <span class="symbol-font">⭡ 100 ⭣ 100</span>
+        </div>
+    </div>
+    <script src="src/script/admin.js" type="module"></script>
+</body>
+</html>
