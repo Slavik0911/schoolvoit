@@ -19,6 +19,17 @@
         font-family: 'Advent Pro', sans-serif; 
     }
 
+    .arrow {
+        font-family: 'Segoe UI Symbol', sans-serif;
+        font-size: 1.1em;
+        display: flex;
+        align-items: center;
+    }
+    .arrow i {
+        margin: 0 5px;
+    }
+    
+
     /* colors */
     .pink {
         background: #FFCEFA;
