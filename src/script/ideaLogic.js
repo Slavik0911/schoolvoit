@@ -10,7 +10,8 @@ async function submitIdea(title, description) {
       title: title,
       description: description,
       timestamp: new Date().toISOString(),
-      voteRate: 0 // Add an initial vote rate
+      upVotes: 0,  // Add initial upvote count
+      downVotes: 0 // Add initial downvote count
     });
     alert("Ідея успішно додана!");
     window.location.href = 'order.html';
@@ -61,30 +62,36 @@ async function voteIdea(voteType) {
     votedIdeas.push(ideaId);
     localStorage.setItem('votedIdeas', JSON.stringify(votedIdeas));
 
-    // Get the idea document and update the vote rate
     const ideaDoc = doc(firestore, "ideas", ideaId);
     try {
-      // Update the vote rate based on the vote type
+      // Get the current values ​​of upVotes and downVotes
       const snapshot = await getDocs(collection(firestore, "ideas"));
       const currentIdea = snapshot.docs.find(doc => doc.id === ideaId);
-      let currentVoteRate = currentIdea.data().voteRate || 0;
+      let currentUpVotes = currentIdea.data().upVotes || 0;
+      let currentDownVotes = currentIdea.data().downVotes || 0;
 
+      // We update voting depending on the type
       if (voteType === 'upvote') {
-        currentVoteRate += 1;
+        currentUpVotes += 1;
       } else if (voteType === 'downvote') {
-        currentVoteRate -= 1;
+        currentDownVotes += 1;
       }
 
-      await updateDoc(ideaDoc, { voteRate: currentVoteRate });
+      // Update the document in the database
+      await updateDoc(ideaDoc, {
+        upVotes: currentUpVotes,
+        downVotes: currentDownVotes
+      });
+
+      //Update the display of ideas with new voices
+      const title_random = document.getElementById('title-random');
+      const description_random = document.getElementById('description-random');
+      getLatestIdea(title_random, description_random);
+
     } catch (error) {
-      console.error("Error updating vote rate:", error);
+      console.error("Error updating vote counts:", error);
     }
   }
-
-  // Update the display with a new idea
-  const title_random = document.getElementById('title-random');
-  const description_random = document.getElementById('description-random');
-  getLatestIdea(title_random, description_random);
 }
 
 export { submitIdea, getLatestIdea, voteIdea };
