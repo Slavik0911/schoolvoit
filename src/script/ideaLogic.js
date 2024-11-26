@@ -3,12 +3,13 @@ import { collection, addDoc, getDocs, updateDoc, doc } from "https://www.gstatic
 import { firestore } from './firebase.js';
 
 // Function to submit an idea to the database
-async function submitIdea(title, description) {
+async function submitIdea(title, description, author) {
   try {
     const ideasCollection = collection(firestore, "ideas");
     await addDoc(ideasCollection, {
       title: title,
       description: description,
+      author:author || 'Анонім',
       timestamp: new Date().toISOString(),
       upVotes: 0,  // Add initial upvote count
       downVotes: 0 // Add initial downvote count
@@ -22,7 +23,7 @@ async function submitIdea(title, description) {
 }
 
 // Function to get the latest idea that has not been voted on yet
-async function getLatestIdea(title_random, description_random) {
+async function getLatestIdea(title_last, description_last) {
   try {
     const votedIdeas = JSON.parse(localStorage.getItem('votedIdeas')) || [];
     const ideasCollection = collection(firestore, "ideas");
@@ -38,17 +39,17 @@ async function getLatestIdea(title_random, description_random) {
     // Display the latest idea
     if (filteredIdeas.length > 0) {
       const latestIdea = filteredIdeas[0]; // Take the first (newest) idea
-      title_random.textContent = latestIdea.title;
-      description_random.textContent = latestIdea.description;
-      title_random.dataset.ideaId = latestIdea.id;
+      title_last.textContent = latestIdea.title;
+      description_last.textContent = latestIdea.description;
+      title_last.dataset.ideaId = latestIdea.id;
     } else {
-      title_random.textContent = "No available ideas.";
-      description_random.textContent = "";
+      title_last.textContent = "No available ideas.";
+      description_last.textContent = "";
     }
   } catch (error) {
     console.error("Error getting idea:", error);
-    title_random.textContent = "Error loading idea.";
-    description_random.textContent = "";
+    title_last.textContent = "Error loading idea.";
+    description_last.textContent = "";
   }
 }
 
@@ -84,9 +85,9 @@ async function voteIdea(voteType) {
       });
 
       //Update the display of ideas with new voices
-      const title_random = document.getElementById('title-random');
-      const description_random = document.getElementById('description-random');
-      getLatestIdea(title_random, description_random);
+      const title_last = document.getElementById('title-random');
+      const description_last = document.getElementById('description-random');
+      getLatestIdea(title_last, description_last);
 
     } catch (error) {
       console.error("Error updating vote counts:", error);

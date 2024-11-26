@@ -5,11 +5,11 @@ import { submitIdea, getLatestIdea, voteIdea } from './ideaLogic.js';
 const submitButton = document.getElementById('submitIdeaButton');
 const inputTitle = document.getElementById('input-title');
 const inputDescription = document.getElementById('input-description');
-const inputNumber = document.getElementById('input-number');
+const inputAuthor = document.getElementById('input-author');
 const buttonApply = document.getElementById('button-apply');
 const backButton = document.getElementById('backButton');
-const title_random = document.getElementById('title-random');
-const description_random = document.getElementById('description-random');
+const title_last = document.getElementById('title-random');
+const description_last = document.getElementById('description-random');
 const upvoteButton = document.getElementById('upvoteButton');
 const downvoteButton = document.getElementById('downvoteButton');
 
@@ -37,7 +37,7 @@ function setupButtonApply() {
     buttonApply.addEventListener('click', () => {
       const title = inputTitle.value;
       const description = inputDescription.value;
-      const phoneNumber = inputNumber.value;
+      const author = inputAuthor.value;
 
       //Enter to admin functional
       if (title === "admin" && description === "admin") {
@@ -45,8 +45,8 @@ function setupButtonApply() {
         return; 
       }
 
-      if (title && description && phoneNumber) {
-        submitIdea(title, description);
+      if (title && description && author) {
+        submitIdea(title, description, author);
       } else {
         alert("Please fill out all fields.");
       }
@@ -56,8 +56,8 @@ function setupButtonApply() {
 
 // Function to get the latest idea that hasn't been voted on yet
 function setupRandomIdea() {
-  if (title_random && description_random) {
-    getLatestIdea(title_random, description_random);
+  if (title_last && description_last) {
+    getLatestIdea(title_last, description_last);
   }
 }
 
