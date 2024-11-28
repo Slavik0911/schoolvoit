@@ -1,6 +1,12 @@
 // Import functions from ideaLogic.js and domHandlers.js
-import { submitIdea, getLatestIdea, voteIdea } from './ideaLogic.js';
+import { submitIdea, getLatestIdea, voteIdea, createUser, getUserId } from './ideaLogic.js';
 import { setupBackButton, setupSubmitButton, setupButtonApply } from './domHandlers.js';
+
+
+window.onload = async function () {
+  const userId = getUserId(); // Generate or get a user ID
+  await createUser(userId); // Create a record in Firestore if it doesn't exist yet
+};
 
 document.addEventListener("DOMContentLoaded", function () {
   const title_last = document.getElementById('title-random');

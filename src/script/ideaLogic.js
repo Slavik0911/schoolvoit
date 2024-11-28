@@ -1,24 +1,68 @@
 // Import Firestore functions
-import { collection, addDoc, getDocs, updateDoc, doc } from "https://www.gstatic.com/firebasejs/9.1.0/firebase-firestore.js";
+import { collection, addDoc, setDoc, getDocs, updateDoc, doc } from "https://www.gstatic.com/firebasejs/9.1.0/firebase-firestore.js";
 import { firestore } from './firebase.js';
+import { getDoc } from "https://www.gstatic.com/firebasejs/9.1.0/firebase-firestore.js";
+
+// Function to get a unique user ID
+function getUserId() {
+  let userId = localStorage.getItem("userId");
+  if (!userId) {
+    userId = crypto.randomUUID(); // Generate a new unique ID
+    localStorage.setItem("userId", userId); // Store it for future use
+  }
+  return userId;
+}
+
+// Check if a user is banned
+async function isUserBanned(userId) {
+  const userRef = doc(firestore, "users", userId);
+  const userDoc = await getDoc(userRef);
+
+  if (userDoc.exists() && userDoc.data().isBanned) {
+    return true;
+  }
+  return false;
+}
+
+// Function to create a user if they do not exist
+async function createUser(userId) {
+  const userRef = doc(firestore, "users", userId);
+  const userDoc = await getDoc(userRef);
+
+  if (!userDoc.exists()) {
+    await setDoc(userRef, { isBanned: false });
+  }
+}
 
 // Function to submit an idea to the database
 async function submitIdea(title, description, author) {
   try {
+    const userId = getUserId(); // Get user ID
+
+    // Check if the user is banned
+    const banned = await isUserBanned(userId);
+    if (banned) {
+      alert("Ви заблоковані та не можете надсилати ідеї.");
+      return;
+    }
+
+    // Save the idea to Firestore
     const ideasCollection = collection(firestore, "ideas");
     await addDoc(ideasCollection, {
       title: title,
       description: description,
-      author:author || 'Анонім',
+      author: author || 'Анонім',
+      userId: userId, // Save user ID with the idea
       timestamp: new Date().toISOString(),
-      upVotes: 0,  // Add initial upvote count
-      downVotes: 0 // Add initial downvote count
+      upVotes: 0,
+      downVotes: 0
     });
+
     alert("Ідея успішно додана!");
     window.location.href = 'order.html';
   } catch (error) {
-    console.error("Error adding idea:", error);
-    alert("Failed to add idea. Please try again.");
+    console.error("Помилка додавання ідеї:", error);
+    alert("Не вдалося додати ідею. Спробуйте ще раз.");
   }
 }
 
@@ -84,7 +128,7 @@ async function voteIdea(voteType) {
         downVotes: currentDownVotes
       });
 
-      //Update the display of ideas with new voices
+      // Update the display of ideas with new votes
       const title_last = document.getElementById('title-random');
       const description_last = document.getElementById('description-random');
       getLatestIdea(title_last, description_last);
@@ -95,4 +139,4 @@ async function voteIdea(voteType) {
   }
 }
 
-export { submitIdea, getLatestIdea, voteIdea };
+export { submitIdea, getLatestIdea, voteIdea, createUser, getUserId };

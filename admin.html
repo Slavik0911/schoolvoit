@@ -8,13 +8,27 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Advent+Pro:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <style>
-        /* Ваші CSS стилі тут */
-    </style>
 </head>
 <body class="flex flex-col items-center">
     <h1 class="title">Список ідей</h1>
     <div id="idea-list"></div>
+    <div id="bar" class="absolute top-1/4 w-2/3 h-[500px] light-grey flex flex-col items-center p-4 rounded-2xl opacity-95 hidden">
+        <h1 id="modal-title" class="text-2xl mb-4">Заголовок</h1>
+        <h1 id="author" class="modal-title mb-4"> Вася Пупкін 9-А</h1>
+        <div id="modal-description" class="text-base break-words text-center w-full overflow-y-auto h-[300px]">
+            ///При частковій чи повній прозорості, елемент буде розміщено на новому шарі...
+            (довгий текст тут)
+        </div>
+        <div class="flex justify-between w-full mt-auto">
+            <button id="user-ban" class="void-button--small red h-[8vh] rounded-2xl text-[14px] p-2">Забанити юзера</button>
+            <button id="delete-idea" class="void-button--small red h-[8vh] rounded-2xl text-[14px] p-2">Видалити ідею</button>
+        </div>
+        <!-- Close button -->
+        <button class="mt-4 text-white bg-red-500 rounded p-2" id="close-btn">Закрити</button>
+    </div>
+    
+    
+
 
     <script type="module" src="src/script/admin.js"></script>
 </body>
