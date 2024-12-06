@@ -35,9 +35,9 @@ function setupSubmitButton() {
 function setupButtonApply() {
   if (buttonApply) {
     buttonApply.addEventListener('click', () => {
-      const title = inputTitle.value;
-      const description = inputDescription.value;
-      const author = inputAuthor.value;
+      const title = inputTitle.value.trim();
+      const description = inputDescription.value.trim();
+      const author = inputAuthor.value.trim();
 
       //Enter to admin functional
       if (title === "admin" && description === "admin") {

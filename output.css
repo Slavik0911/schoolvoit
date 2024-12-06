@@ -762,20 +762,13 @@ video {
   position: absolute;
 }
 
-.relative {
-  position: relative;
-}
-
 .top-1\/4 {
   top: 25%;
 }
 
-.bottom-4 {
-  bottom: 1rem;
-}
-
-.z-10 {
-  z-index: 10;
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .mb-4 {
@@ -790,48 +783,16 @@ video {
   margin-top: 1rem;
 }
 
-.mt-10 {
-  margin-top: 2.5rem;
-}
-
-.mt-\[10\] {
-  margin-top: 10;
-}
-
-.mt-\[10px\] {
-  margin-top: 10px;
-}
-
-.mt-\[100px\] {
-  margin-top: 100px;
-}
-
-.mt-14 {
-  margin-top: 3.5rem;
-}
-
-.mt-\[\] {
-  margin-top: ;
-}
-
-.mt-\[px\] {
-  margin-top: px;
-}
-
-.mt-\[250px\] {
-  margin-top: 250px;
-}
-
-.mt-\[1px\] {
-  margin-top: 1px;
-}
-
-.mt-\[8vh\] {
-  margin-top: 8vh;
-}
-
 .mt-auto {
   margin-top: auto;
+}
+
+.ml-1 {
+  margin-left: 0.25rem;
+}
+
+.mr-1 {
+  margin-right: 0.25rem;
 }
 
 .block {
@@ -846,28 +807,16 @@ video {
   display: none;
 }
 
-.h-2\/3 {
-  height: 66.666667%;
-}
-
-.h-\[10vh\] {
-  height: 10vh;
-}
-
-.h-\[8vh\] {
-  height: 8vh;
-}
-
-.h-auto {
-  height: auto;
-}
-
 .h-\[300px\] {
   height: 300px;
 }
 
 .h-\[500px\] {
   height: 500px;
+}
+
+.h-\[8vh\] {
+  height: 8vh;
 }
 
 .min-h-screen {
@@ -884,6 +833,14 @@ video {
 
 .flex-grow {
   flex-grow: 1;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.resize-none {
+  resize: none;
 }
 
 .list-inside {
@@ -906,16 +863,8 @@ video {
   justify-content: space-between;
 }
 
-.justify-around {
-  justify-content: space-around;
-}
-
 .overflow-hidden {
   overflow: hidden;
-}
-
-.overflow-visible {
-  overflow: visible;
 }
 
 .overflow-y-auto {
@@ -934,17 +883,17 @@ video {
   border-radius: 1rem;
 }
 
-.bg-gray-200 {
+.bg-red-500 {
   --tw-bg-opacity: 1;
-  background-color: rgb(229 231 235 / var(--tw-bg-opacity));
-}
-
-.p-4 {
-  padding: 1rem;
+  background-color: rgb(239 68 68 / var(--tw-bg-opacity));
 }
 
 .p-2 {
   padding: 0.5rem;
+}
+
+.p-4 {
+  padding: 1rem;
 }
 
 .px-4 {
@@ -952,8 +901,9 @@ video {
   padding-right: 1rem;
 }
 
-.pt-\[250px\] {
-  padding-top: 250px;
+.py-2 {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
 }
 
 .text-center {
@@ -974,21 +924,18 @@ video {
   line-height: 1.5rem;
 }
 
-.text-xl {
-  font-size: 1.25rem;
-  line-height: 1.75rem;
+.text-sm {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
 }
 
 .uppercase {
   text-transform: uppercase;
 }
 
-.text-\[\] {
-  color: ;
-}
-
-.opacity-90 {
-  opacity: 0.9;
+.text-white {
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
 .opacity-95 {

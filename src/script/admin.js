@@ -113,13 +113,13 @@ function displayIdeaInBar(idea, bar) {
 
     const banButton = document.createElement('button');
     banButton.classList.add('void-button--small', 'red', 'h-[8vh]', 'rounded-2xl', 'text-[14px]', 'p-2');
-    banButton.textContent = 'Ban user';
+    banButton.textContent = 'Забанити юзера';
     banButton.addEventListener('click', () => banUser(idea.userId)); // Add event listener for banning the user
     buttons.appendChild(banButton);
 
     const deleteButton = document.createElement('button');
     deleteButton.classList.add('void-button--small', 'red', 'h-[8vh]', 'rounded-2xl', 'text-[14px]', 'p-2');
-    deleteButton.textContent = 'Delete idea';
+    deleteButton.textContent = 'Видалити ідею';
     deleteButton.addEventListener('click', () => deleteIdea(idea.id)); // Add event listener for deleting the idea
     buttons.appendChild(deleteButton);
 
