@@ -587,11 +587,11 @@ video {
 /* colors */
 
 .pink {
-  background: #FFCEFA;
+  background: #94ABB0;
 }
 
 .purple {
-  background: #D7A4FF;
+  background: #9C333A;
 }
 
 .light-green {
@@ -611,7 +611,7 @@ video {
 }
 
 .grey{
-  background: #D2D0D0;
+  background: #DFDFDF;
 }
 
 .light-grey{
@@ -647,7 +647,7 @@ video {
 }
 
 .button--medium {
-  background: #D7A4FF;
+  background: #9C333A;
   height: 60px;
   width: 300px;
   border-radius: 1rem;
@@ -787,14 +787,6 @@ video {
   margin-top: auto;
 }
 
-.ml-1 {
-  margin-left: 0.25rem;
-}
-
-.mr-1 {
-  margin-right: 0.25rem;
-}
-
 .block {
   display: block;
 }
@@ -837,10 +829,6 @@ video {
 
 .cursor-pointer {
   cursor: pointer;
-}
-
-.resize-none {
-  resize: none;
 }
 
 .list-inside {
