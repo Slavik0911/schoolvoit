@@ -87,12 +87,12 @@ async function getLatestIdea(title_last, description_last) {
       description_last.textContent = latestIdea.description;
       title_last.dataset.ideaId = latestIdea.id;
     } else {
-      title_last.textContent = "No available ideas.";
-      description_last.textContent = "";
+      title_last.textContent = "Ідеї закінчились";
+      description_last.textContent = "Добав свою";
     }
   } catch (error) {
     console.error("Error getting idea:", error);
-    title_last.textContent = "Error loading idea.";
+    title_last.textContent = "Помилка завантаження.";
     description_last.textContent = "";
   }
 }

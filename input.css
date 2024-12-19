@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+
 @layer components {
     /* button back */
     .back-button {
@@ -31,18 +32,18 @@
     
 
     /* colors */
-    .pink {
-        background: #FFCEFA;
+    .pink{
+        background: #90FFB2;
     }
-    .purple {
-        background: #D7A4FF;
+    .purple{
+        background: #FF6C6A;
     }
     .light-green {
         background: #C3FFCA;
     }
 
     .green{
-        background: #9EFFAD;
+        background: #90FFB2;
     }
 
     .mint-green{
@@ -50,7 +51,7 @@
     }
 
     .red{
-        background: #FFB9B9;
+        background: #FF6C6A;
     }
 
     .light-red{
@@ -63,7 +64,12 @@
     .light-grey{
         background: #E9E9E9; 
     }
-
+    .yellow{
+        background: #FFD009;
+    }
+    .purples{
+        background: #8A52F5;
+    }
 
     .idea{
         @apply w-[360px] h-[70px] rounded-2xl; 
@@ -80,7 +86,7 @@
         @apply h-[10vh] text-[40px] inter; 
     }
     .button--medium {
-        @apply purple w-[300px] h-[60px] rounded-2xl;
+        @apply w-[300px] h-[60px] rounded-2xl;
     }
 
     /* inputs */

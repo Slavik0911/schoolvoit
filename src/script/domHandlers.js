@@ -40,7 +40,7 @@ function setupButtonApply() {
       const author = inputAuthor.value.trim();
 
       //Enter to admin functional
-      if (title === "admin" && description === "admin") {
+      if (title === "admin123" && description === "admin123") {
         window.location.href = 'admin.html';
         return; 
       }
@@ -48,7 +48,7 @@ function setupButtonApply() {
       if (title && description && author) {
         submitIdea(title, description, author);
       } else {
-        alert("Please fill out all fields.");
+        alert("Заповни всі поля");
       }
     });
   }

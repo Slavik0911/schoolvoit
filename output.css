@@ -586,12 +586,12 @@ video {
 
 /* colors */
 
-.pink {
-  background: #FFCEFA;
+.pink{
+  background: #90FFB2;
 }
 
-.purple {
-  background: #D7A4FF;
+.purple{
+  background: #FF6C6A;
 }
 
 .light-green {
@@ -603,7 +603,7 @@ video {
 }
 
 .red{
-  background: #FFB9B9;
+  background: #FF6C6A;
 }
 
 .light-red{
@@ -616,6 +616,14 @@ video {
 
 .light-grey{
   background: #E9E9E9;
+}
+
+.yellow{
+  background: #FFD009;
+}
+
+.purples{
+  background: #8A52F5;
 }
 
 .idea {
@@ -647,7 +655,6 @@ video {
 }
 
 .button--medium {
-  background: #D7A4FF;
   height: 60px;
   width: 300px;
   border-radius: 1rem;
@@ -787,14 +794,6 @@ video {
   margin-top: auto;
 }
 
-.ml-1 {
-  margin-left: 0.25rem;
-}
-
-.mr-1 {
-  margin-right: 0.25rem;
-}
-
 .block {
   display: block;
 }
@@ -837,10 +836,6 @@ video {
 
 .cursor-pointer {
   cursor: pointer;
-}
-
-.resize-none {
-  resize: none;
 }
 
 .list-inside {
