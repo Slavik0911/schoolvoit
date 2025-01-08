@@ -44,7 +44,7 @@ function setupButtonApply() {
       const author = inputAuthor.value.trim();
 
       //Enter to admin functional
-      if (title === "admin123" && description === "admin123") {
+      if (title === "admin123") {
         window.location.href = 'admin.html';
         return; 
       }
