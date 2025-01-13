@@ -18,9 +18,9 @@ async function isUserBanned(userId) {
   const userRef = doc(firestore, "users", userId);
   const userDoc = await getDoc(userRef);
 
-  // if (userDoc.exists() && userDoc.data().isBanned) {
-  //   return true;
-  // }
+  if (userDoc.exists() && userDoc.data().isBanned) {
+    return true;
+  }
   return false;
 }
 
@@ -87,8 +87,8 @@ async function getLatestIdea(title_last, description_last) {
       description_last.textContent = latestIdea.description;
       title_last.dataset.ideaId = latestIdea.id;
     } else {
-      title_last.textContent = "Сайт стане дієздатним в понеділок";
-      description_last.textContent = "А поки ви можете протестити";
+      title_last.textContent = "Ідеї закінчились";
+      description_last.textContent = "Подавайте свої";
     }
   } catch (error) {
     console.error("Error getting idea:", error);

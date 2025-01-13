@@ -15,7 +15,7 @@ const downvoteButton = document.getElementById('downvoteButton');
 
 
 //If you want limit use app 
-let closeApp = true ; 
+let closeApp = false ; 
 
 // Function to handle the "Back" button
 function setupBackButton() {
