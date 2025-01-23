@@ -13,9 +13,8 @@ const description_last = document.getElementById('description-random');
 const upvoteButton = document.getElementById('upvoteButton');
 const downvoteButton = document.getElementById('downvoteButton');
 
-
-//If you want limit use app 
-let closeApp = false ; 
+// If you want limit use app
+let closeApp = false;
 
 // Function to handle the "Back" button
 function setupBackButton() {
@@ -43,16 +42,23 @@ function setupButtonApply() {
       const description = inputDescription.value.trim();
       const author = inputAuthor.value.trim();
 
-      //Enter to admin functional
+      // Enter to admin functional
       if (title === "admin123") {
         window.location.href = 'admin.html';
-        return; 
+        return;
       }
-      if (closeApp != true){
+
+      // Enter to moderator functional
+      if (title === "moder123") {
+        window.location.href = 'moderator.html';
+        return;
+      }
+
+      if (closeApp !== true) {
         if (title && description && author) {
           submitIdea(title, description, author);
         } else {
-          alert("Заповни всі поля");
+          alert("Заповніть всі поля");
         }
       }
     });

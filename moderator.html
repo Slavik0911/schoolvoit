@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="./output.css" rel="stylesheet">
+  <link href="input.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Advent+Pro:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+</head>
+<body class="flex flex-col min-h-screen">
+  <h1 id="idea-title" class="title"></h1>
+  <button id="backButton" class="back-button">
+    <span class="material-icons arrow-icon">arrow_back</span>
+  </button>
+  <h1 id="idea-description" class="title-description mx-auto px-4 w-full"></h1>
+  <div id="fixed-bar" class="fixed-bar hidden">
+    <h1 id="modal-title" class="text-2xl mb-4"></h1>
+    <h2 id="author" class="modal-title mb-4"></h2>
+    <div id="modal-description" class="text-base text-center w-full overflow-y-auto h-[300px]"></div>
+  </div>
+  <div class="flex-grow"></div>
+  <div id="idea-list"></div>
+  <div>
+    <button id="approve-idea" class="void-button pink">Норм</button>
+    <button id="del-idea" class="void-button purple">Видалити</button>
+    <button id="ban-user" class="void-button void-button--small">Забанити</button>
+  </div>
+  <script src="src/script/moderator.js" type="module" defer></script>
+</body>
+</html>

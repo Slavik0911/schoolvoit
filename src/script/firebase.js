@@ -3,14 +3,14 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/9.1.0/firebase
 import { getDatabase } from "https://www.gstatic.com/firebasejs/9.1.0/firebase-database.js";
 import { getFirestore } from "https://www.gstatic.com/firebasejs/9.1.0/firebase-firestore.js";
 
-// Configuration Firebase
+// Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyD18OiMrP8CqXKprtxnUGjf-TBhN1jLGKQ",
-  authDomain: "voiting-d2e1c.firebaseapp.com",
-  projectId: "voiting-d2e1c",
-  storageBucket: "voiting-d2e1c.firebasestorage.app",
-  messagingSenderId: "178962638405",
-  appId: "1:178962638405:web:6fc9f5151f8ef0c785652c"
+  apiKey: "AIzaSyCqOe9V1Jr_yIHLNTT6fltrpGhavrn42Mk",
+  authDomain: "vote-ab70a.firebaseapp.com",
+  projectId: "vote-ab70a",
+  storageBucket: "vote-ab70a.firebasestorage.app",
+  messagingSenderId: "320451497958",
+  appId: "1:320451497958:web:c8ae366408be4ecea75027"
 };
 
 // Initialization Firebase

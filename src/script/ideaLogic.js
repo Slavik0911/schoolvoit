@@ -1,7 +1,6 @@
 // Import Firestore functions
-import { collection, addDoc, setDoc, getDocs, updateDoc, doc } from "https://www.gstatic.com/firebasejs/9.1.0/firebase-firestore.js";
+import { collection, addDoc, getDocs, updateDoc, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/9.1.0/firebase-firestore.js";
 import { firestore } from './firebase.js';
-import { getDoc } from "https://www.gstatic.com/firebasejs/9.1.0/firebase-firestore.js";
 
 // Function to get a unique user ID
 function getUserId() {
@@ -54,19 +53,20 @@ async function submitIdea(title, description, author) {
       author: author || 'Анонім',
       userId: userId, // Save user ID with the idea
       timestamp: new Date().toISOString(),
+      isApproved: false, // Idea initially needs approval
       upVotes: 0,
       downVotes: 0
     });
 
-    alert("Ідея успішно додана!");
-    window.location.href = 'order.html';
+    alert("Ідею подано на модерацію.");
+    window.location.href = 'index.html';
   } catch (error) {
     console.error("Помилка додавання ідеї:", error);
     alert("Не вдалося додати ідею. Спробуйте ще раз.");
   }
 }
 
-// Function to get the latest idea that has not been voted on yet
+// Function to get the latest idea that has not been voted on yet and is approved
 async function getLatestIdea(title_last, description_last) {
   try {
     const votedIdeas = JSON.parse(localStorage.getItem('votedIdeas')) || [];
@@ -74,11 +74,10 @@ async function getLatestIdea(title_last, description_last) {
     const snapshot = await getDocs(ideasCollection);
     const ideas = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
 
-    // Sort ideas by timestamp (newest first)
-    ideas.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
-
-    // Filter out ideas that have already been voted on
-    const filteredIdeas = ideas.filter(idea => !votedIdeas.includes(idea.id));
+    // Sort ideas by timestamp (newest first) and filter out unapproved and already voted ideas
+    const filteredIdeas = ideas
+      .filter(idea => idea.isApproved && !votedIdeas.includes(idea.id)) // Only approved ideas
+      .sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp)); // Newest first
 
     // Display the latest idea
     if (filteredIdeas.length > 0) {
