@@ -1,4 +1,4 @@
-import { collection, getDocs, updateDoc, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/9.1.0/firebase-firestore.js";
+import { collection, getDocs, updateDoc, deleteDoc, doc, getDoc } from "https://www.gstatic.com/firebasejs/9.1.0/firebase-firestore.js";
 import { firestore } from './firebase.js';
 
 let cachedIdeas = null; // Cache for ideas
@@ -7,6 +7,26 @@ let cachedIdeas = null; // Cache for ideas
 document.addEventListener("DOMContentLoaded", () => {
     displayIdeas();
 });
+
+// Function to pin an idea
+async function pinIdea(ideaId) {
+    try {
+        const ideaRef = doc(firestore, "ideas", ideaId);
+        const ideaDoc = await getDoc(ideaRef);
+
+        if (ideaDoc.exists()) {
+            const isPinned = !ideaDoc.data().isPinned; // Toggle the current value of isPinned
+
+            await updateDoc(ideaRef, { isPinned });
+            alert("Ідея закріплена.");
+        } else {
+            console.error("Ідея не знайдена.");
+        }
+    } catch (error) {
+        console.error("Помилка при закріпленні ідеї:", error);
+        alert("Не вдалося закріпити ідею. Спробуйте ще раз.");
+    }
+}
 
 // Function to fetch and display ideas
 async function displayIdeas() {
@@ -72,6 +92,12 @@ async function displayIdeas() {
         // Add event listener to display details on the panel
         ideaElement.addEventListener('click', () => displayIdeaInBar(idea));
     });
+
+    // Add event listener to the pin idea button
+    document.getElementById('pin-idea').addEventListener('click', () => {
+        const ideaId = document.getElementById('modal-title').dataset.id;
+        pinIdea(ideaId);
+    });
 }
 
 // Function to retrieve ideas from Firestore
@@ -103,6 +129,7 @@ function displayIdeaInBar(idea) {
     const description = document.getElementById('modal-description');
 
     title.textContent = idea.title;
+    title.dataset.id = idea.id;  // Add dataset.id here
     author.textContent = idea.author;
     description.textContent = idea.description;
 

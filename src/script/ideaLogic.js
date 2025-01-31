@@ -36,63 +36,70 @@ async function createUser(userId) {
 // Function to submit an idea to the database
 async function submitIdea(title, description, author) {
   try {
-    const userId = getUserId(); // Get user ID
+      const userId = getUserId(); // Get user ID
 
-    // Check if the user is banned
-    const banned = await isUserBanned(userId);
-    if (banned) {
-      alert("Ви заблоковані та не можете надсилати ідеї.");
-      return;
-    }
+      // Check if the user is banned
+      const banned = await isUserBanned(userId);
+      if (banned) {
+          alert("Ви заблоковані та не можете надсилати ідеї.");
+          return;
+      }
 
-    // Save the idea to Firestore
-    const ideasCollection = collection(firestore, "ideas");
-    await addDoc(ideasCollection, {
-      title: title,
-      description: description,
-      author: author || 'Анонім',
-      userId: userId, // Save user ID with the idea
-      timestamp: new Date().toISOString(),
-      isApproved: false, // Idea initially needs approval
-      upVotes: 0,
-      downVotes: 0
-    });
+      // Save the idea to Firestore
+      const ideasCollection = collection(firestore, "ideas");
+      await addDoc(ideasCollection, {
+          title: title,
+          description: description,
+          author: author || 'Анонім',
+          userId: userId, // Save user ID with the idea
+          timestamp: new Date().toISOString(),
+          isApproved: false, // Idea initially needs approval
+          upVotes: 0,
+          downVotes: 0,
+          isPinned: false // Default value for isPinned
+      });
 
-    alert("Ідею подано на модерацію.");
-    window.location.href = 'index.html';
+      alert("Ідею подано на модерацію.");
+      window.location.href = 'index.html';
   } catch (error) {
-    console.error("Помилка додавання ідеї:", error);
-    alert("Не вдалося додати ідею. Спробуйте ще раз.");
+      console.error("Помилка додавання ідеї:", error);
+      alert("Не вдалося додати ідею. Спробуйте ще раз.");
   }
 }
+
 
 // Function to get the latest idea that has not been voted on yet and is approved
 async function getLatestIdea(title_last, description_last) {
   try {
-    const votedIdeas = JSON.parse(localStorage.getItem('votedIdeas')) || [];
-    const ideasCollection = collection(firestore, "ideas");
-    const snapshot = await getDocs(ideasCollection);
-    const ideas = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+      const votedIdeas = JSON.parse(localStorage.getItem('votedIdeas')) || [];
+      const ideasCollection = collection(firestore, "ideas");
+      const snapshot = await getDocs(ideasCollection);
+      const ideas = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
 
-    // Sort ideas by timestamp (newest first) and filter out unapproved and already voted ideas
-    const filteredIdeas = ideas
-      .filter(idea => idea.isApproved && !votedIdeas.includes(idea.id)) // Only approved ideas
-      .sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp)); // Newest first
+      // Sort ideas by isPinned and timestamp, filter out unapproved and already voted ideas
+      const filteredIdeas = ideas
+          .filter(idea => idea.isApproved && !votedIdeas.includes(idea.id)) // Only approved ideas
+          .sort((a, b) => {
+              if (a.isPinned === b.isPinned) {
+                  return new Date(b.timestamp) - new Date(a.timestamp);
+              }
+              return a.isPinned ? -1 : 1;
+          });
 
-    // Display the latest idea
-    if (filteredIdeas.length > 0) {
-      const latestIdea = filteredIdeas[0]; // Take the first (newest) idea
-      title_last.textContent = latestIdea.title;
-      description_last.textContent = latestIdea.description;
-      title_last.dataset.ideaId = latestIdea.id;
-    } else {
-      title_last.textContent = "Ідеї закінчились";
-      description_last.textContent = "Подавайте свої";
-    }
+      // Display the latest idea
+      if (filteredIdeas.length > 0) {
+          const latestIdea = filteredIdeas[0]; // Take the first (newest or pinned) idea
+          title_last.textContent = latestIdea.title;
+          description_last.textContent = latestIdea.description;
+          title_last.dataset.ideaId = latestIdea.id;
+      } else {
+          title_last.textContent = "Ідеї закінчились";
+          description_last.textContent = "Подавайте свої";
+      }
   } catch (error) {
-    console.error("Error getting idea:", error);
-    title_last.textContent = "Помилка завантаження.";
-    description_last.textContent = "";
+      console.error("Error getting idea:", error);
+      title_last.textContent = "Помилка завантаження.";
+      description_last.textContent = "";
   }
 }
 
