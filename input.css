@@ -139,9 +139,9 @@
             @apply w-full h-[25vh] text-[64px] inter; 
         }
         .void-button--small {
-            @apply h-[10vh] text-[20px] inter; 
+            @apply h-[10vh] text-[20px] inter w-full mb-2 flex justify-center items-center text-center;
         }
     }
-
-
+    
+    
 }
