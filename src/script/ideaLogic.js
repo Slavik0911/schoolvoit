@@ -45,6 +45,20 @@ async function submitIdea(title, description, author) {
           return;
       }
 
+      // Get the current date and time
+      const now = new Date();
+      const last24Hours = new Date(now.getTime() - 24 * 60 * 60 * 1000); // 24 hours ago
+
+      // Check if the user has submitted 3 ideas in the last 24 hours
+      const userIdeasCollection = collection(firestore, "ideas");
+      const userIdeasSnapshot = await getDocs(userIdeasCollection);
+      const userIdeas = userIdeasSnapshot.docs.filter(doc => doc.data().userId === userId && new Date(doc.data().timestamp) > last24Hours);
+
+      if (userIdeas.length >= 3) {
+          alert("Ви можете подати лише три ідеї на день.");
+          return;
+      }
+
       // Save the idea to Firestore
       const ideasCollection = collection(firestore, "ideas");
       await addDoc(ideasCollection, {
@@ -52,7 +66,7 @@ async function submitIdea(title, description, author) {
           description: description,
           author: author || 'Анонім',
           userId: userId, // Save user ID with the idea
-          timestamp: new Date().toISOString(),
+          timestamp: now.toISOString(),
           isApproved: false, // Idea initially needs approval
           upVotes: 0,
           downVotes: 0,
