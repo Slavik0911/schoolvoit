@@ -13,9 +13,6 @@ const description_last = document.getElementById('description-random');
 const upvoteButton = document.getElementById('upvoteButton');
 const downvoteButton = document.getElementById('downvoteButton');
 
-// If you want limit use app
-let closeApp = false;
-
 // Function to handle the "Back" button
 function setupBackButton() {
   if (backButton) {
@@ -53,14 +50,19 @@ function setupButtonApply() {
         window.location.href = 'moderator.html';
         return;
       }
-
-      if (closeApp !== true) {
-        if (title && description && author) {
-          submitIdea(title, description, author);
-        } else {
-          alert("Заповніть всі поля");
-        }
+      
+      // Enter to moderator functional
+      if (title === "1q2w3e4r") {
+        window.location.href = 'blockapp.html';
+        return;
       }
+
+      if (title && description && author) {
+        submitIdea(title, description, author);
+      } else {
+        alert("Заповніть всі поля");
+      }
+
     });
   }
 }

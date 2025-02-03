@@ -81,6 +81,15 @@ async function submitIdea(title, description, author) {
   }
 }
 
+const isAppBlocked = localStorage.getItem('appBlocked') === 'true';
+if (isAppBlocked) {
+  // Disable all buttons if the app is blocked
+  submitButton.disabled = true;
+  backButton.disabled = true;
+  document.title = "Технічна перерва"; 
+  // You can also add a message to inform the users
+  alert('The app is currently blocked.');
+}
 
 // Function to get the latest idea that has not been voted on yet and is approved
 async function getLatestIdea(title_last, description_last) {
@@ -100,63 +109,64 @@ async function getLatestIdea(title_last, description_last) {
               return a.isPinned ? -1 : 1;
           });
 
+
       // Display the latest idea
       if (filteredIdeas.length > 0) {
-          const latestIdea = filteredIdeas[0]; // Take the first (newest or pinned) idea
-          title_last.textContent = latestIdea.title;
-          description_last.textContent = latestIdea.description;
-          title_last.dataset.ideaId = latestIdea.id;
-      } else {
-          title_last.textContent = "Ідеї закінчились";
-          description_last.textContent = "Подавайте свої";
-      }
-  } catch (error) {
-      console.error("Error getting idea:", error);
-      title_last.textContent = "Помилка завантаження.";
-      description_last.textContent = "";
-  }
+        const latestIdea = filteredIdeas[0]; // Take the first (newest or pinned) idea
+        title_last.textContent = latestIdea.title;
+        description_last.textContent = latestIdea.description;
+        title_last.dataset.ideaId = latestIdea.id;
+    } else {
+        title_last.textContent = "Ідеї закінчились";
+        description_last.textContent = "Подавайте свої";
+    }
+} catch (error) {
+    console.error("Error getting idea:", error);
+    title_last.textContent = "Помилка завантаження.";
+    description_last.textContent = "";
+}
 }
 
 // Function to handle voting
 async function voteIdea(voteType) {
-  const ideaId = document.getElementById('title-random').dataset.ideaId;
-  if (!ideaId) return;
+const ideaId = document.getElementById('title-random').dataset.ideaId;
+if (!ideaId) return;
 
-  const votedIdeas = JSON.parse(localStorage.getItem('votedIdeas')) || [];
-  if (!votedIdeas.includes(ideaId)) {
-    votedIdeas.push(ideaId);
-    localStorage.setItem('votedIdeas', JSON.stringify(votedIdeas));
+const votedIdeas = JSON.parse(localStorage.getItem('votedIdeas')) || [];
+if (!votedIdeas.includes(ideaId)) {
+  votedIdeas.push(ideaId);
+  localStorage.setItem('votedIdeas', JSON.stringify(votedIdeas));
 
-    const ideaDoc = doc(firestore, "ideas", ideaId);
-    try {
-      // Get the current values ​​of upVotes and downVotes
-      const snapshot = await getDocs(collection(firestore, "ideas"));
-      const currentIdea = snapshot.docs.find(doc => doc.id === ideaId);
-      let currentUpVotes = currentIdea.data().upVotes || 0;
-      let currentDownVotes = currentIdea.data().downVotes || 0;
+  const ideaDoc = doc(firestore, "ideas", ideaId);
+  try {
+    // Get the current values ​​of upVotes and downVotes
+    const snapshot = await getDocs(collection(firestore, "ideas"));
+    const currentIdea = snapshot.docs.find(doc => doc.id === ideaId);
+    let currentUpVotes = currentIdea.data().upVotes || 0;
+    let currentDownVotes = currentIdea.data().downVotes || 0;
 
-      // We update voting depending on the type
-      if (voteType === 'upvote') {
-        currentUpVotes += 1;
-      } else if (voteType === 'downvote') {
-        currentDownVotes += 1;
-      }
-
-      // Update the document in the database
-      await updateDoc(ideaDoc, {
-        upVotes: currentUpVotes,
-        downVotes: currentDownVotes
-      });
-
-      // Update the display of ideas with new votes
-      const title_last = document.getElementById('title-random');
-      const description_last = document.getElementById('description-random');
-      getLatestIdea(title_last, description_last);
-
-    } catch (error) {
-      console.error("Error updating vote counts:", error);
+    // We update voting depending on the type
+    if (voteType === 'upvote') {
+      currentUpVotes += 1;
+    } else if (voteType === 'downvote') {
+      currentDownVotes += 1;
     }
+
+    // Update the document in the database
+    await updateDoc(ideaDoc, {
+      upVotes: currentUpVotes,
+      downVotes: currentDownVotes
+    });
+
+    // Update the display of ideas with new votes
+    const title_last = document.getElementById('title-random');
+    const description_last = document.getElementById('description-random');
+    getLatestIdea(title_last, description_last);
+
+  } catch (error) {
+    console.error("Error updating vote counts:", error);
   }
+}
 }
 
 export { submitIdea, getLatestIdea, voteIdea, createUser, getUserId };
