@@ -8,9 +8,6 @@ function setupBlockButton() {
       // Block buttons on index.html by setting a flag in Firestore or local storage
       localStorage.setItem('appBlocked', 'true');
       alert('App is now blocked!');
-
-      // Change the title to "Технічна перерва"
-      document.title = "Технічна перерва";
     });
   }
 }

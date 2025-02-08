@@ -32,18 +32,20 @@ async function pinIdea(ideaId) {
 async function displayIdeas() {
     const ideas = await getIdeas();
     const ideaList = document.getElementById('idea-list');
-    const ideaModal = document.getElementById('idea-modal');
-    const bar = document.getElementById('bar'); // Extract the panel for the idea
 
     if (!ideaList) {
         console.error("Element with id 'idea-list' not found");
         return;
     }
 
+    // Clear the existing list of ideas
+    ideaList.innerHTML = '';
+
     // Iterate through each idea and create elements to display them
     ideas.forEach(idea => {
         const ideaElement = document.createElement('div');
         ideaElement.classList.add('idea', 'mt-2', 'flex', 'flex-col', 'cursor-pointer');
+        ideaElement.dataset.id = idea.id; // Додати цей рядок
 
         // Determine background color based on upVotes and downVotes
         if (idea.upVotes > idea.downVotes) {
@@ -98,6 +100,16 @@ async function displayIdeas() {
         const ideaId = document.getElementById('modal-title').dataset.id;
         pinIdea(ideaId);
     });
+    // Add event listener to the delete idea
+    document.getElementById('delete-idea').addEventListener('click', () => {
+        const ideaId = document.getElementById('modal-title').dataset.id;
+        deleteIdea(ideaId);
+    });
+    // Add event listener to the ban user
+    document.getElementById('user-ban').addEventListener('click', () => {
+        const userId = document.getElementById('author').dataset.userId; 
+        banUser(userId);
+    });
 }
 
 // Function to retrieve ideas from Firestore
@@ -131,6 +143,7 @@ function displayIdeaInBar(idea) {
     title.textContent = idea.title;
     title.dataset.id = idea.id;  // Add dataset.id here
     author.textContent = idea.author;
+    author.dataset.userId = idea.userId;  // Додати цей рядок
     description.textContent = idea.description;
 
     ideaModal.classList.remove('hidden');
@@ -161,15 +174,10 @@ async function deleteIdea(ideaId) {
         const ideaRef = doc(firestore, "ideas", ideaId);
         await deleteDoc(ideaRef);
 
-        // Update the cache without reloading all data
-        cachedIdeas = cachedIdeas.filter(idea => idea.id !== ideaId);
-
-        const ideaElement = document.querySelector(`.idea[data-id="${ideaId}"]`);
-        if (ideaElement) {
-            ideaElement.remove(); // Remove the element from DOM
-        }
-
         alert("Ідею видалено.");
+
+        //Reload page
+        window.location.reload();
     } catch (error) {
         console.error("Помилка видалення ідеї:", error);
         alert("Не вдалося видалити ідею. Спробуйте ще раз.");

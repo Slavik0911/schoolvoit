@@ -86,9 +86,6 @@ if (isAppBlocked) {
   // Disable all buttons if the app is blocked
   submitButton.disabled = true;
   backButton.disabled = true;
-  document.title = "Технічна перерва"; 
-  // You can also add a message to inform the users
-  alert('The app is currently blocked.');
 }
 
 // Function to get the latest idea that has not been voted on yet and is approved
