@@ -174,8 +174,6 @@ async function deleteIdea(ideaId) {
         const ideaRef = doc(firestore, "ideas", ideaId);
         await deleteDoc(ideaRef);
 
-        alert("Ідею видалено.");
-
         //Reload page
         window.location.reload();
     } catch (error) {
