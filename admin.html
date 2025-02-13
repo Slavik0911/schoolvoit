@@ -6,7 +6,7 @@
     <link href="./output.css" rel="stylesheet">
     <link href="input.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         /* Додатковий стиль для фіксації */
         #idea-modal {
@@ -38,6 +38,13 @@
 </head>
 <body class="flex flex-col items-center dark-grey">
     <h1 class="title">Список ідей</h1>
+    <select id="filterOptions" class="w-[360px] px-4 py-1.5 text-lg font-semibold text-gray-800 bg-gray-100 border border-gray-400 rounded-md cursor-pointer hover:bg-gray-200 focus:bg-white focus:border-blue-500 focus:ring focus:ring-blue-300 focus:outline-none transition">
+        <option value="mostUpvotes">Найбільше голосів "за"</option>
+        <option value="mostDownvotes">Найбільше голосів "проти"</option>
+        <option value="highestPercentage">Найбільший % голосів "за"</option>
+        <option value="lowestPercentage">Найменший % голосів "за"</option>
+    </select>
+      
     <div id="idea-list"></div>
     <div id="idea-modal" class="hidden">
         <div id="bar" class="flex flex-col items-center">

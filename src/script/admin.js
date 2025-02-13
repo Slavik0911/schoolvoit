@@ -95,6 +95,7 @@ async function displayIdeas() {
         ideaElement.addEventListener('click', () => displayIdeaInBar(idea));
     });
 
+
     // Add event listener to the pin idea button
     document.getElementById('pin-idea').addEventListener('click', () => {
         const ideaId = document.getElementById('modal-title').dataset.id;
@@ -132,6 +133,40 @@ async function getIdeas() {
     cachedIdeas = ideas;
     return ideas;
 }
+
+const filterOptions = document.getElementById('filterOptions');
+
+function applyFilter(ideas) {
+  const selectedFilter = filterOptions.value;
+
+  switch (selectedFilter) {
+    case 'mostUpvotes':
+      return ideas.sort((a, b) => b.upVotes - a.upVotes);
+    case 'mostDownvotes':
+      return ideas.sort((a, b) => b.downVotes - a.downVotes);
+    case 'highestPercentage':
+      return ideas.sort((a, b) => {
+        const aPercentage = a.upVotes / (a.upVotes + a.downVotes || 1);
+        const bPercentage = b.upVotes / (b.upVotes + b.downVotes || 1);
+        return bPercentage - aPercentage;
+      });
+    case 'lowestPercentage':
+      return ideas.sort((a, b) => {
+        const aPercentage = a.upVotes / (a.upVotes + a.downVotes || 1);
+        const bPercentage = b.upVotes / (b.upVotes + b.downVotes || 1);
+        return aPercentage - bPercentage;
+      });
+    default:
+      return ideas;
+  }
+}
+filterOptions.addEventListener('change', async () => {
+    const ideas = await getIdeas();
+    const sortedIdeas = applyFilter(ideas);
+    displayIdeas(sortedIdeas);
+  });
+  
+
 
 // Function to display idea details in the panel
 function displayIdeaInBar(idea) {
@@ -182,4 +217,4 @@ async function deleteIdea(ideaId) {
     }
 }
 
-export { displayIdeas, banUser, deleteIdea };
+export { displayIdeas, banUser, deleteIdea, applyFilter };
